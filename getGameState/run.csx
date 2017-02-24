@@ -1,5 +1,6 @@
 #r "Newtonsoft.Json"
 
+using System.Net;
 using Newtonsoft.Json;
 
 public static HttpResponseMessage Run(HttpRequestMessage req, TraceWriter log)
