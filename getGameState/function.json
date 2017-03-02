@@ -3,14 +3,25 @@
   "bindings": [
     {
       "authLevel": "function",
+      "direction": "in",
+      "methods": [ "GET" ],
       "name": "req",
-      "type": "httpTrigger",
-      "direction": "in"
+      "route": "game/{id}",
+      "type": "httpTrigger"
     },
     {
+      "collectionName": "nunsgames",
+      "connection": "DocDbConnection",
+      "databaseName": "nuns",
+      "direction": "in",
+      "id": "{id}",
+      "name": "gameDoc",
+      "type": "documentDB"
+    },
+    {
+      "direction": "out",
       "name": "$return",
-      "type": "http",
-      "direction": "out"
+      "type": "http"
     }
   ]
 }

@@ -3,13 +3,21 @@
 using System.Net;
 using Newtonsoft.Json;
 
-public static HttpResponseMessage Run(HttpRequestMessage req, TraceWriter log)
+public static HttpResponseMessage Run(
+    HttpRequestMessage req,
+    dynamic gameDoc,
+    TraceWriter log)
 {
-    var gameStateSerialized = JsonConvert.SerializeObject(new GameState { WaitingForThieves = true }, Formatting.Indented);
+    var gameIdFound = gameDoc != null;
+
+    var gameStateSerialized = JsonConvert.SerializeObject(
+        new GameState { WaitingForThieves = true, GameIdFound = gameIdFound },
+        Formatting.Indented);
     return req.CreateResponse(HttpStatusCode.OK, gameStateSerialized);
 }
 
 public class GameState
 {
     public bool WaitingForThieves { get; set; }
+    public bool GameIdFound { get; set; }
 }
