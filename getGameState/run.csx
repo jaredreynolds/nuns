@@ -1,7 +1,4 @@
-#r "Newtonsoft.Json"
-
 using System.Net;
-using Newtonsoft.Json;
 
 public static HttpResponseMessage Run(
     HttpRequestMessage req,
@@ -9,11 +6,9 @@ public static HttpResponseMessage Run(
     TraceWriter log)
 {
     var gameIdFound = gameDoc != null;
+    var gameState = new GameState { WaitingForThieves = true, GameIdFound = gameIdFound };
 
-    var gameStateSerialized = JsonConvert.SerializeObject(
-        new GameState { WaitingForThieves = true, GameIdFound = gameIdFound },
-        Formatting.Indented);
-    return req.CreateResponse(HttpStatusCode.OK, gameStateSerialized);
+    return req.CreateResponse(HttpStatusCode.OK, gameState);
 }
 
 public class GameState
