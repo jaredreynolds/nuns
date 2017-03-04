@@ -1,0 +1,27 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "function",
+      "direction": "in",
+      "methods": [ "GET" ],
+      "name": "req",
+      "route": "player/{id?}",
+      "type": "httpTrigger"
+    },
+    {
+      "collectionName": "players",
+      "connection": "DocDbConnection",
+      "databaseName": "nuns",
+      "direction": "in",
+      "id": "{id}",
+      "name": "playerDoc",
+      "type": "documentDB"
+    },
+    {
+      "direction": "out",
+      "name": "$return",
+      "type": "http"
+    }
+  ]
+}
