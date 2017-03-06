@@ -5,15 +5,15 @@ public static HttpResponseMessage Run(
     dynamic gameDoc,
     TraceWriter log)
 {
-    var gameState = new GameState
+    var Game = new Game
     {
         Status = Enum.Parse(typeof(GameStatus), gameDoc.Status).ToString()
     };
 
-    return req.CreateResponse(HttpStatusCode.OK, gameState);
+    return req.CreateResponse(HttpStatusCode.OK, Game);
 }
 
-public class GameState
+public class Game
 {
     public string Status { get; set; }
     public uint Turn { get; set; }
