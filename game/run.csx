@@ -7,7 +7,7 @@ public static HttpResponseMessage Run(
 {
     var gameStatus = (GameStatus)Enum.Parse(typeof(GameStatus), gameDoc.status, true);
 
-    var turn = gameStatus >= GameStatus.Started)
+    var turn = gameStatus >= GameStatus.Started
         ? gameDoc.turn
         : 0;
 
