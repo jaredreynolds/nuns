@@ -5,9 +5,16 @@ public static HttpResponseMessage Run(
     dynamic gameDoc,
     TraceWriter log)
 {
+    var gameStatus = (GameStatus)Enum.Parse(typeof(GameStatus), gameDoc.status, true);
+
+    var turn = gameStatus >= GameStatus.Started)
+        ? gameDoc.turn
+        : 0;
+
     var Game = new Game
     {
-        Status = Enum.Parse(typeof(GameStatus), gameDoc.Status).ToString()
+        Status = gameStatus.ToString(),
+        Turn = turn
     };
 
     return req.CreateResponse(HttpStatusCode.OK, Game);
@@ -25,6 +32,7 @@ public enum GameStatus
     Created,
     PlayersJoining,
     PlayersInvited,
+    Started,
     ThievesTurn,
     ThievesExtraTurn,
     GuardsTurn,
