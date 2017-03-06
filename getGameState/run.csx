@@ -7,7 +7,7 @@ public static HttpResponseMessage Run(
 {
     var gameState = new GameState
     {
-        Status = (GameStatus)Enum.Parse(typeof(GameStatus), gameDoc.Status)
+        Status = Enum.Parse(typeof(GameStatus), gameDoc.Status).ToString()
     };
 
     return req.CreateResponse(HttpStatusCode.OK, gameState);
@@ -15,7 +15,7 @@ public static HttpResponseMessage Run(
 
 public class GameState
 {
-    public GameStatus Status { get; set; }
+    public string Status { get; set; }
     public uint Turn { get; set; }
 }
 
