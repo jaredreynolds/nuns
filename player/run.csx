@@ -5,7 +5,7 @@ public static HttpResponseMessage Run(
     dynamic playerDoc,
     TraceWriter log)
 {
-    log.Info(playerDoc);
+    log.Info(playerDoc != null ? playerDoc.display : "{null}");
     return req.CreateResponse(HttpStatusCode.OK, "Hello?");
 }
 
