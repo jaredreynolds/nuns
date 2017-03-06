@@ -11,5 +11,5 @@ public static HttpResponseMessage Run(
 
 public class Player
 {
-    public string Display { get; set; }
+    public string DisplayName { get; set; }
 }

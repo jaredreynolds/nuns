@@ -5,14 +5,28 @@ public static HttpResponseMessage Run(
     dynamic gameDoc,
     TraceWriter log)
 {
-    var gameIdFound = gameDoc != null;
-    var gameState = new GameState { WaitingForThieves = true, GameIdFound = gameIdFound };
+    var gameState = new GameState
+    {
+        Status = Enum.Parse(typeof(GameState), gameDoc.Status)
+    };
 
     return req.CreateResponse(HttpStatusCode.OK, gameState);
 }
 
 public class GameState
 {
-    public bool WaitingForThieves { get; set; }
-    public bool GameIdFound { get; set; }
+    public GameStatus Status { get; set; }
+    public uint Turn { get; set; }
+}
+
+public enum GameStatus
+{
+    Unknown,
+    Created,
+    PlayersJoining,
+    PlayersInvited,
+    ThievesTurn,
+    ThievesExtraTurn,
+    GuardsTurn,
+    Finished
 }
