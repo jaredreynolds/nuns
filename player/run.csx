@@ -5,7 +5,11 @@ public static HttpResponseMessage Run(
     dynamic playerDoc,
     TraceWriter log)
 {
-    log.Info(playerDoc != null ? playerDoc.display : "{null}");
-    return req.CreateResponse(HttpStatusCode.OK, "Hello?");
+    var player = new Player { Display = playerDoc.displayName };
+    return req.CreateResponse(HttpStatusCode.OK, player);
 }
 
+public class Player
+{
+    public string Display { get; set; }
+}
