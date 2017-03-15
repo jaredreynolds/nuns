@@ -5,7 +5,7 @@ public static HttpResponseMessage Run(
     dynamic playerDoc,
     TraceWriter log)
 {
-    var player = new Player { Display = playerDoc.displayName };
+    var player = new Player { DisplayName = playerDoc.displayName };
     return req.CreateResponse(HttpStatusCode.OK, player);
 }
 
