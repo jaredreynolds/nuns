@@ -5,7 +5,21 @@ public static HttpResponseMessage Run(
     dynamic playerDoc,
     TraceWriter log)
 {
-    var player = new Player { DisplayName = playerDoc.displayName };
+    string displayName;
+
+    switch (req.method)
+    {
+        case "POST":
+            if (playerDoc != null)
+            {
+                log.Info(req, "player", "Player already exists: {0}", playerDoc.id);
+                return req.CreateResponse(HttpStatusCode.Conflict, "Player already exists");
+            }
+            displayName = playerDoc.displayName;
+            break;
+    }
+
+    var player = new Player { DisplayName = displayName };
     return req.CreateResponse(HttpStatusCode.OK, player);
 }
 

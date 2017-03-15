@@ -4,7 +4,7 @@
     {
       "authLevel": "function",
       "direction": "in",
-      "methods": [ "GET" ],
+      "methods": [ "POST", "PATCH", "DELETE" ],
       "name": "req",
       "route": "player/{id?}",
       "type": "httpTrigger"
