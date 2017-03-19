@@ -6,9 +6,9 @@ public static async Task<HttpResponseMessage> Run(
     object newPlayerDoc,
     TraceWriter log)
 {
-    switch (req.Method)
+    switch (req.Method.ToString().ToUpper())
     {
-        case HttpMethod.Post:
+        case "POST":
             if (playerDoc != null)
             {
                 log.Info($"Player already exists: {playerDoc.id}");
