@@ -6,7 +6,7 @@ public static async Task<HttpResponseMessage> Run(
     object newPlayerDoc,
     TraceWriter log)
 {
-    log.Info($"{req.Method}");
+    log.Info("method started");
 
     switch (req.Method.ToString().ToUpper())
     {
