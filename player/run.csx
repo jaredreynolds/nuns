@@ -6,6 +6,8 @@ public static async Task<HttpResponseMessage> Run(
     object newPlayerDoc,
     TraceWriter log)
 {
+    log.Info($"{req.Method}");
+
     switch (req.Method.ToString().ToUpper())
     {
         case "POST":
