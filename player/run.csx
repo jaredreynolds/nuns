@@ -3,10 +3,10 @@ using System.Net;
 public static async Task<HttpResponseMessage> Run(
     HttpRequestMessage req,
     dynamic playerDoc,
-    object newPlayerDoc,
+    out object newPlayerDoc,
     TraceWriter log)
 {
-    log.Info("method started");
+    log.Info($"{req.Method}");
 
     switch (req.Method.ToString().ToUpper())
     {
