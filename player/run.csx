@@ -25,6 +25,6 @@ public static async Task<HttpResponseMessage> Run(
 
             return req.CreateResponse(HttpStatusCode.OK, newPlayerDoc);
         default:
-            return req.CreateResponse(HttpStatusCode.BadRequest, string.Empty);
+            return req.CreateResponse(HttpStatusCode.BadRequest, "Unsupported method");
     }
 }
