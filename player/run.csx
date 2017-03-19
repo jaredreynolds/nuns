@@ -1,12 +1,11 @@
 using System.Net;
 
-public static HttpResponseMessage Run(
+public static async HttpResponseMessage Run(
     HttpRequestMessage req,
     dynamic playerDoc,
+    object newPlayerDoc,
     TraceWriter log)
 {
-    string displayName = "";
-
     switch (req.Method)
     {
         case "POST":
@@ -15,15 +14,19 @@ public static HttpResponseMessage Run(
                 log.Info(req, "player", "Player already exists: {0}", new[] { playerDoc.id });
                 return req.CreateResponse(HttpStatusCode.Conflict, "Player already exists");
             }
-            displayName = playerDoc.displayName;
+
+            dynamic reqData = await req.Content.ReadAsAsync<object>();
+
+            newPlayerDoc = new
+            {
+                displayName = reqData.displayName,
+                id = Guid.NewGuid()
+            };
+
+            return req.CreateResponse(HttpStatusCode.OK, newPlayerDoc);
+            break;
+        default:
+            return req.CreateResponse(HttpStatusCode.BadRequest, null);
             break;
     }
-
-    var player = new Player { DisplayName = displayName };
-    return req.CreateResponse(HttpStatusCode.OK, player);
-}
-
-public class Player
-{
-    public string DisplayName { get; set; }
 }

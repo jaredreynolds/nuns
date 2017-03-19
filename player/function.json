@@ -19,6 +19,15 @@
       "type": "documentDB"
     },
     {
+      "collectionName": "players",
+      "connection": "DocDbConnection",
+      "createIfNotExists": false,
+      "databaseName": "nuns",
+      "direction": "out",
+      "name": "newPlayerDoc",
+      "type": "documentDB"
+    },
+    {
       "direction": "out",
       "name": "$return",
       "type": "http"
