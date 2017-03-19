@@ -1,6 +1,6 @@
 using System.Net;
 
-public static async HttpResponseMessage Run(
+public static async Task<HttpResponseMessage> Run(
     HttpRequestMessage req,
     dynamic playerDoc,
     object newPlayerDoc,
@@ -8,10 +8,10 @@ public static async HttpResponseMessage Run(
 {
     switch (req.Method)
     {
-        case "POST":
+        case HttpMethod.Post:
             if (playerDoc != null)
             {
-                log.Info(req, "player", "Player already exists: {0}", new[] { playerDoc.id });
+                log.Info($"Player already exists: {playerDoc.id}");
                 return req.CreateResponse(HttpStatusCode.Conflict, "Player already exists");
             }
 
@@ -24,9 +24,7 @@ public static async HttpResponseMessage Run(
             };
 
             return req.CreateResponse(HttpStatusCode.OK, newPlayerDoc);
-            break;
         default:
-            return req.CreateResponse(HttpStatusCode.BadRequest, null);
-            break;
+            return req.CreateResponse(HttpStatusCode.BadRequest, string.Empty);
     }
 }
