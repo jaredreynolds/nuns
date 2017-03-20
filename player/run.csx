@@ -18,7 +18,9 @@ public static HttpResponseMessage Run(
                 return req.CreateResponse(HttpStatusCode.Conflict, "Player already exists");
             }
 
-            dynamic reqData = req.Content.ReadAsAsync<object>().Wait();
+            var contentTask = req.Content.ReadAsAsync<object>();
+            contentTask.Wait();
+            dynamic reqData = contentTask.Result;
 
             newPlayerDoc = new
             {
