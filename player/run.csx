@@ -1,6 +1,6 @@
 using System.Net;
 
-public static async Task<HttpResponseMessage> Run(
+public static HttpResponseMessage Run(
     HttpRequestMessage req,
     dynamic playerDoc,
     out object newPlayerDoc,
@@ -14,10 +14,11 @@ public static async Task<HttpResponseMessage> Run(
             if (playerDoc != null)
             {
                 log.Info($"Player already exists: {playerDoc.id}");
+                newPlayerDoc = null;
                 return req.CreateResponse(HttpStatusCode.Conflict, "Player already exists");
             }
 
-            dynamic reqData = await req.Content.ReadAsAsync<object>();
+            dynamic reqData = req.Content.ReadAsAsync<object>().Wait();
 
             newPlayerDoc = new
             {
@@ -27,6 +28,7 @@ public static async Task<HttpResponseMessage> Run(
 
             return req.CreateResponse(HttpStatusCode.OK, newPlayerDoc);
         default:
+            newPlayerDoc = null;
             return req.CreateResponse(HttpStatusCode.BadRequest, "Unsupported method");
     }
 }
